@@ -1,0 +1,17 @@
+from custom_exceptions.bad_employee_info import BadEmployeeInfo
+from entities.Employee import Employee
+from service_access_layer.employee_service_access_layer.employee_sal_interface import EmployeeSALInterface
+from utils.manage_connection import connection
+
+
+class EmployeeSALImp(EmployeeSALInterface):
+    def user_account_access(self, username: str, password: str) -> Employee:
+        sql = "select password from employee where username = %s"
+        cursor = connection.cursor()
+        cursor.execute(sql, [username])
+        record = cursor.fetchone()
+        if len(record) != 0:
+            employee = Employee(*record)
+            return employee
+        else:
+            raise BadEmployeeInfo("No employee record found")

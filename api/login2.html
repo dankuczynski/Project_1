@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>For Fetch</title>
+</head>
+<body>
+
+    <input type="text" id="username" placeholder="Type your username here">
+    <br>
+    <input type="text" id="password" placeholder="Type your password here">
+    <button onclick="addUsernamePassword()">click this to add your username and password to the credentials json</button>
+    <br>
+    <button onclick="sendMessage()">click this to send the message in your http request</button>
+    <br>
+    <input type="text" id="name" placeholder="Put a name in here">
+    <br>
+    <button onclick="getGreeting()">click me to get a personalized greeting for the name you entered above</button>
+
+</body>
+<script>
+
+    // const messageInput = document.getElementById("message");
+    // const nameInput = document.getElementById("name");
+
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+
+    // let messages = {1:"Message one", 2:"Message two"};
+    // let messageNumber = 2;
+
+    // function addMessage(){
+    //     messageNumber += 1;
+    //     messages[messageNumber] = messageInput.value;
+    //     console.log(messageInput.value)
+    //     messageInput.value = "";
+    // }
+
+    let credentialsUnPw = {1: "username", 2: "password"}
+
+    function addUsernamePassword(){
+        credentialsUnPw[1] = usernameInput.value;
+        console.log(usernameInput.value)
+        usernameInput.value = "";
+        credentialsUnPw[2] = passwordInput.value;
+        console.log(passwordInput.value)
+        passwordInput.value = "";
+
+
+    async function sendMessage(){
+
+        let config = {
+            method:"POST",
+            headers:{'Content-Type':"application/json"},
+            body: JSON.stringify(credentialsUnPw)
+        }
+
+        const response = await fetch("http://localhost:5000/body", config);
+        if(response.status === 200){
+            // message = await response.text();
+            username = await response.json();
+            password = await response.json();
+            alert("Correct Info");
+        } else {
+            alert("Oops");
+        }
+    }
+}
+
+</script>
+</html>

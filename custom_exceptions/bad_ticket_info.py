@@ -1,0 +1,2 @@
+class BadTicketInfo(Exception):
+    pass
