@@ -1,0 +1,2 @@
+class CancellationFail(Exception):
+    pass
