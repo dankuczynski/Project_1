@@ -29,7 +29,7 @@ class EmployeeDAOImp(EmployeeDAOInterface):
             raise BadEmployeeInfo("Password does not match.")
 
     def employee_id_username_password_match(self, username: str, password: str) -> int:
-        sql = "select employee_id from employee where username = %s, password = %s"
+        sql = "select employee_id from employee where username = %s and password = %s"
         cursor = connection.cursor()
         cursor.execute(sql, [username, password])
         record = cursor.fetchone()
