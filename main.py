@@ -28,16 +28,10 @@ ticket_service = TicketSALImp(ticket_dao)
 @app.post("/body")
 def sending_http_request_with_body():
     body: dict = request.get_json()
-    if correct_id == employee_dao.employee_id_username_password_match(body['username'], body['password']):
-        employee_id = employee_dao.employee_id_username_password_match(body['username'], body['password'])
-        employee_id = jsonify(employee_id)
-        to_send = employee_id
-        return redirect("create_and_view_tickets.html", to_send=employee_id), 200
-        # return jsonify('employeeId': employee_id), 200
+    employee_id = employee_dao.employee_id_username_password_match(body['1'], body['2'])
+    employee_id_dictionary = {"employeeId" : employee_id}
+    return jsonify(employee_id_dictionary), 200
 
-    # return jsonify({"message": "done"}, 200)
-
-# body = request_json()
 
 @app.post("/create_and_view_tickets")
 def making_and_seeing_tickets():
