@@ -6,31 +6,27 @@ from entities.Employee import Employee
 employee_dao = EmployeeDAOImp()
 
 
-def test_read_employee_username_by_id():
-    employee = Employee(1, username: str, password: str)
-    result = employee_dao.read_employee_username_by_id()
+def test_read_employee_username():
+    result = employee_dao.reading_username("WillTest")
     assert True
 
 
 def test_read_employee_username_invalid_id():
     try:
-        employee = Employee(1, username: str, password: str)
-        result = employee_dao.get_employee_username_by_id()
+        result = employee_dao.reading_username(1)
         assert False
     except BadEmployeeInfo as e:
         assert str(e) == "Incorrect Employee information"
 
 
 def test_read_employee_password_by_id():
-    employee = Employee(1, username: str, password: str)
-    result = employee_dao.reading_password()
+    result = employee_dao.reading_password("D03sThisW0rk?")
     assert True
 
 
 def test_read_employee_password_invalid_id():
     try:
-        employee = Employee(1, username: str, password: str)
-        result = employee_dao.read_employee_password_by_id()
+        result = employee_dao.reading_password(2)
         assert False
     except BadEmployeeInfo as e:
         assert str(e) == "Incorrect Employee information"
