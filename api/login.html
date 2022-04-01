@@ -46,7 +46,7 @@
         if(response.status === 200){
             const id = await response.json();
             window.localStorage.setItem("employeeId", id.employeeId);
-            window.location.href = "\create_and_view_tickets.html";
+            window.location.href = "tickets.html";
             // username = await response.text();
             // window.localStorage.setItem("text", username)
             // window.location.href = "create_and_view_tickets.html"

@@ -36,19 +36,33 @@ def sending_http_request_with_body():
         return jsonify(employee_id_dictionary), 200
 
 
-@app.post("/create_and_view_tickets")
+@app.post("/tickets")
 def making_tickets():
     body: dict = request.get_json()
-    ticket_num = ticket_dao.create_ticket(body["1"], body["2"], body["3"])
-    view_single_ticket = ticket_dao.get_ticket_by_ticket_number(ticket_num)
-    ticket_dict = view_single_ticket.ticket_dictionary_conversion()
-    return jsonify(ticket_dict), 200
+    # print(body)
+    # return jsonify(body)
+    print(body)
+    ticket_num = ticket_dao.create_ticket(int(body["1"]), body["2"], float(body["3"]))
+    ticket_num_dictionary = {"ticketNumber": ticket_num}
+    return jsonify(ticket_num_dictionary)
+    # print(ticket_num)
+    # view_single_ticket = ticket_dao.get_ticket_by_ticket_number(ticket_num)
+    # print(view_single_ticket)
+    # ticket_dict = view_single_ticket.ticket_dictionary_conversion()
+    # return jsonify(ticket_dict), 200
     # Ticket_Dict= Ticket_num.ticket_number_dictionary_conversion()
     # return jsonify(Ticket_Dict), 200
 
-@app.get("/create_and_view_tickets")
-def viewing_tickets():
-    body: dict = request.get_json
+@app.get("/tickets/<employeeId>")
+def viewing_tickets(employeeId: str):
+    body: dict = request.get_json()
+    tickets = ticket_dao.get_all_ticket_by_employee_id(int(employeeId))
+    # service layer to handle conversion
+    # service layer to turn into Ticket objects into dictionaries
+    # list of dictionaries and jsonify them
+    # return jsonified dictionary, 200
+
+    #service access layer to validate it
 
 
 
