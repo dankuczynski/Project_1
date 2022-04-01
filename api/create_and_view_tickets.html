@@ -4,6 +4,10 @@
     <title>create_and_view_tickets</title>
 </head>
 <body>
+    <input type="text" id="reimbursement_reason" placeholder="What is the reason you want a reimbursement">
+    <br>
+    <input type="text" id="reimbursement_ticket_amount" placeholder="How much do you need for reimbursement?">
+    <br>
     <button id="create">
         Create a reimbursement ticket
     </button>
@@ -12,13 +16,31 @@
         View your reimbursement tickets
     </button>
     <br>
+    <button id="logout" onclick="logout()">
+       Logout from your account
+    </button>
 
 </body>
 
 <script>
+//In JavaScript:
+// get the ticket info from the employee and place it in an object
+// pass that object through the JSON.stringify method
+// place it in the body of the http request
 
-    let id = window.localStorage.getItem("EmployeeId")
+// In python:
+// convert the json into a dictionary
+// create ticket object from values in dictionary
+// pass it into service layer
 
+
+
+    let id = window.localStorage.getItem("EmployeeId");
+
+    async function logout(){
+        window.localStorage.removeItem("EmployeeId");
+        window.location.href = "\login.html";
+    }
     // const employeeInput = document.getElementById("create");
     // const employeeInput = document.getElementById("create");
 
