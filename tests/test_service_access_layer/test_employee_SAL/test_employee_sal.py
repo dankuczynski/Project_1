@@ -20,7 +20,7 @@ def test_invalid_user_name_success():
         employee_service.user_account_access("WillTest ", "Do3sThisW0rk?")
         assert False
     except BadEmployeeInfo as e:
-        assert str(e) == "Please provide a valid user name"
+        assert str(e) == "Invalid employee information"
 
 
 def test_invalid_password_success():
@@ -28,7 +28,7 @@ def test_invalid_password_success():
         employee_service.user_account_access("WillTest", "Do3sThisW0rk? ")
         assert False
     except BadEmployeeInfo as e:
-        assert str(e) == "Please provide a valid password"
+        assert str(e) == "Invalid employee information"
 
 
 def test_invalid_password_length():
@@ -37,7 +37,7 @@ def test_invalid_password_length():
                                              "Do3sThisW0rk?!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         assert False
     except BadEmployeeInfo as e:
-        assert str(e) == "Password length is too long"
+        assert str(e) == "Invalid employee information"
 
 
 def test_invalid_username_length():
@@ -46,8 +46,4 @@ def test_invalid_username_length():
                                              "Do3sThisW0rk?")
         assert False
     except BadEmployeeInfo as e:
-        assert str(e) == "Username length is too long"
-
-
-def test_user_logout_success():
-    pass
+        assert str(e) == "Invalid employee information"
