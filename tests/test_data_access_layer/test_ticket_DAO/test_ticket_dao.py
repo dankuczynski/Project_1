@@ -86,30 +86,21 @@ def test_create_ticket_reason_length():
         assert str(e) == "too long ticket information"
 
 
-def test_get_all_ticket_by_employee_id():
-    result = ticket_dao.get_all_ticket_by_employee_id()
+def test_get_all_ticket_by_ticket_number():
+    result = ticket_dao.get_ticket_by_ticket_number(0)
     assert result.employee_id == int
-
-
-def test_get_all_ticket_invalid_employee_id():
-    try:
-        ticket = Ticket(1, 100, "I need money", 500.00)
-        result = ticket_dao.get_all_ticket_by_employee_id()
-        assert False
-    except BadEmployeeInfo as e:
-        assert str(e) == "Incorrect Employee information"
 
 
 def test_update_ticket_success():
     ticket = Ticket(1, 1, "I need money", 500.00)
-    result = ticket_dao.update_ticket(0)
+    result = ticket_dao.update_ticket(ticket)
     assert result.ticket_number >= 1
 
 
 def test_update_ticket_invalid_ticket_number():
     try:
         ticket = Ticket("two", 1, "I need money", 500.00)
-        result = ticket_dao.update_ticket(ticket.ticket_number)
+        result = ticket_dao.update_ticket(ticket)
         assert False
     except BadTicketInfo as e:
         assert str(e) == "Incorrect Ticket information"
@@ -118,7 +109,7 @@ def test_update_ticket_invalid_ticket_number():
 def test_update_ticket_invalid_data_type():
     try:
         ticket = Ticket("four", 2, "travel", 500.00)
-        result = ticket_dao.update_ticket(ticket.ticket_number)
+        result = ticket_dao.update_ticket(ticket)
         assert False
     except BadTicketInfo as e:
         assert str(e) == "Incorrect Ticket information"
