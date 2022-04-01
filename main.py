@@ -38,59 +38,11 @@ def sending_http_request_with_body():
 
 @app.post("/create_and_view_tickets")
 def making_and_seeing_tickets():
-    pass
+    body: dict = request.get_json()
+    
 
 
 
-
-# @app.route('/login', methods=['POST'])
-# def login():
-#     # if (request.method == 'POST'):
-#     username = request.form.get('username')
-#     password = request.form.get('password')
-#     un = employee_dao.reading_username(username)
-#     pw = employee_dao.reading_password(password)
-#     if username == un.username and password == pw.password:
-#         return redirect("/create_tickets")
-#     else:
-#         return "<h1>Wrong username or password</h1>"  # if the username or password does not matches
-#
-#     # return render_template("login.html")
-
-# 
-# @app.route("/create_tickets", methods=["POST"])
-# def create_ticket_route():
-#     pass
-# 
-
-
-
-# @app.route("/login", methods=["POST"])
-# def login():
-#
-#     credentials = request.get_json()
-#     username = credentials["username"]
-#     password = credentials["password"]
-#     un = employee_dao.reading_username(username)
-#     pw = employee_dao.reading_password(password)
-#     if username == un.username and password == pw.password:
-#         return redirect("http://127.0.0.1:5000/button", code=302)
-#     else:
-#         return "your credentials are bad!"
-
-# @app.route("/button", methods=['GET', 'POST'])
-# def index(form=None):
-#     if request.method == 'POST':
-#         if request.form.get('action1') == 'Create Ticket':
-#             return redirect("http://127.0.0.1:5000/create_ticket")  # do something
-#     elif request.method == 'GET':
-#         return render_template('index.html', form=form)
-#
-#     return render_template("index.html")
-#
-# @app.route("/create_ticket", methods=["POST"])
-# def create_ticket_route():
-#     pass
 
 
 
