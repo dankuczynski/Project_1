@@ -38,7 +38,7 @@
 
 
 
-    let idInput = window.localStorage.getItem("employeeId");
+    const idInput = window.localStorage.getItem("employeeId");
     const reimbursementReasonInput = document.getElementById("reimbursementReason");
     const reimbursementTicketAmountInput = document.getElementById("reimbursementTicketAmount");
 
@@ -47,7 +47,6 @@
     async function addTicketToDatabase(){
             ticketObject[1] = idInput;
             console.log(idInput);
-            idInput = "";
             ticketObject[2] = reimbursementReasonInput.value;
             console.log(reimbursementReasonInput.value);
             reimbursementReasonInput.value = "";
@@ -62,11 +61,11 @@
         body: JSON.stringify(ticketObject)
     };
 
-    const response = await fetch("http://localhost:5000/create_and_view_tickets", config);
+    const response = await fetch("http://localhost:5000/tickets", config);
     if(response.status === 200){
         const ticket = await response.json();
-        window.localStorage.setItem("singleTicket", ticket.singleTicket);
-        alert(`Your Ticket: ${window.localStorage.getItem(singleTicket)}`)
+        // window.localStorage.setItem("singleTicket", ticket.singleTicket);
+        // alert(`Your Ticket: ${window.localStorage.getItem(singleTicket)}`)
         // window.localStorage.setItem("employeeId", id.employeeId);
         // window.location.href = "\create_and_view_tickets.html";
         // username = await response.text();
@@ -79,14 +78,20 @@
     }
 
     async function viewTickets(){
-
-
+        const response = await fetch(`http://localhost:5000/tickets/${idInput}`);
+        if(response.status === 200){
+            const allTickets = await response.json();
+            console.log(allTickets)
+        }
+        else {
+            alert("Couldn't find tickets")
+        }
     }
 
     async function logout(){
         window.localStorage.removeItem("EmployeeId");
         window.localStorage.removeItem("singleTicket")
-        window.location.href = "\login.html";
+        window.location.href = "login.html";
     }
     // const employeeInput = document.getElementById("create");
     // const employeeInput = document.getElementById("create");
