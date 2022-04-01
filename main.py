@@ -4,7 +4,7 @@ from custom_exceptions.bad_employee_info import BadEmployeeInfo
 from utils.manage_connection import OperationalError, connect
 import os
 
-
+from entities.Ticket import Ticket
 from data_access_layer.employee_dao.employee_imp import EmployeeDAOImp
 from data_access_layer.ticket_dao.ticket_imp import TicketDAOImp
 from service_access_layer.employee_service_access_layer.employee_sal_imp import EmployeeSALImp
@@ -37,13 +37,18 @@ def sending_http_request_with_body():
 
 
 @app.post("/create_and_view_tickets")
-def making_and_seeing_tickets():
+def making_tickets():
     body: dict = request.get_json()
-    print(body)
-    return jsonify(body), 200
+    ticket_num = ticket_dao.create_ticket(body["1"], body["2"], body["3"])
+    view_single_ticket = ticket_dao.get_ticket_by_ticket_number(ticket_num)
+    ticket_dict = view_single_ticket.ticket_dictionary_conversion()
+    return jsonify(ticket_dict), 200
+    # Ticket_Dict= Ticket_num.ticket_number_dictionary_conversion()
+    # return jsonify(Ticket_Dict), 200
 
-
-
+@app.get("/create_and_view_tickets")
+def viewing_tickets():
+    body: dict = request.get_json
 
 
 

@@ -6,7 +6,7 @@ from entities.Ticket import Ticket
 class TicketDAOInterface(ABC):
 
     @abstractmethod
-    def create_ticket(self, ticket: Ticket):
+    def create_ticket(self, employee_id, reimbursement_reason, reimbursement_ticket_amount):
         pass
 
     @abstractmethod

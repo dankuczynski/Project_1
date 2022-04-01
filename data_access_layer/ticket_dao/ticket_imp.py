@@ -8,15 +8,15 @@ from utils.manage_connection import connection
 
 class TicketDAOImp(TicketDAOInterface):
 
-    def create_ticket(self, ticket: Ticket):
+    def create_ticket(self, employee_id, reimbursement_reason, reimbursement_ticket_amount):
         try:
-            sql = "insert into ticket values(default, %s, %s, %s) returning ticket_num"
+            sql = "insert into ticket values(default, %s, %s, %s) returning ticket_number"
             cursor = connection.cursor()
-            cursor.execute(sql, (ticket.employee_id, ticket.reimbursement_reason, ticket.reimbursement_ticket_amount))
+            cursor.execute(sql, (employee_id, reimbursement_reason, reimbursement_ticket_amount))
             connection.commit()
-            returned_id = cursor.fetchone()[0]
-            ticket.ticket_number = returned_id
-            return ticket
+            Ticket_number = cursor.fetchone()[0]
+            # ticket_number = returned_id
+            return Ticket_number
         except ConnectionProblem as e:
             raise str(e) == "There was a problem with the connection, please try again."
 
