@@ -12,14 +12,17 @@
         Create a reimbursement ticket
     </button>
     <br>
-    <button id="view">
+    <button id="view" onclick="">
         View your reimbursement tickets
     </button>
     <br>
     <button id="logout" onclick="logout()">
        Logout from your account
     </button>
-
+    <br>
+    <p id="viewOneTicket">
+        
+    </p>
 </body>
 
 <script>
@@ -62,6 +65,8 @@
     const response = await fetch("http://localhost:5000/create_and_view_tickets", config);
     if(response.status === 200){
         const ticket = await response.json();
+        window.localStorage.setItem("singleTicket", ticket.singleTicket);
+        alert(`Your Ticket: ${window.localStorage.getItem(singleTicket)}`)
         // window.localStorage.setItem("employeeId", id.employeeId);
         // window.location.href = "\create_and_view_tickets.html";
         // username = await response.text();
@@ -71,10 +76,16 @@
     } else {
         alert("Incorrect ticket information");
     }
-}
+    }
+
+    async function viewTickets(){
+
+
+    }
 
     async function logout(){
         window.localStorage.removeItem("EmployeeId");
+        window.localStorage.removeItem("singleTicket")
         window.location.href = "\login.html";
     }
     // const employeeInput = document.getElementById("create");

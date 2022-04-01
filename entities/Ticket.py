@@ -6,4 +6,14 @@ class Ticket:
         self.reimbursement_ticket_amount = reimbursement_ticket_amount
 
 
-        
+    def ticket_dictionary_conversion(self):
+        return {
+            "ticketNumber": self.ticket_number,
+            "employeeId": self.employee_id,
+            "reimbursementReason": self.reimbursement_reason,
+            "reimbursementTicketAmount": self.reimbursement_ticket_amount
+        }
+    def ticket_number_dictionary_conversion(self):
+        return {
+            "ticketNumber": self.ticket_number
+        }
