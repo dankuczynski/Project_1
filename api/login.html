@@ -8,6 +8,7 @@
     <input type="text" id="username" placeholder="Type your username here">
     <br>
     <input type="text" id="password" placeholder="Type your password here">
+    <br>
     <button onclick="addUsernamePassword()">click this to add your username and password to the credentials json</button>
     <br>
     <button onclick="sendMessage()">click this to send the message in your http request</button>
@@ -43,28 +44,22 @@
             method:"POST",
             headers:{'Content-Type':"application/json"},
             body: JSON.stringify(credentialsUnPw)
-        }
+        };
 
         const response = await fetch("http://localhost:5000/body", config);
         if(response.status === 200){
-            username = await response.text();
-            window.localStorage.setItem("text", username)
-            window.location.href = "create_and_view_tickets.html"
+            const id = await response.json();
+            window.localStorage.setItem("employeeId", id.employeeId);
+            window.location.href = "\create_and_view_tickets.html";
+            // username = await response.text();
+            // window.localStorage.setItem("text", username)
+            // window.location.href = "create_and_view_tickets.html"
             // username = await response.json();
         } else {
-            alert("Oops");
-        } 
-        const response1 = await fetch("http://localhost:5000/body", config);
-        if(response1.status === 200){
-            // message = await response.text();
-            password = await response1.text();
-            window.local.storage.setItem("password", password)
-            window.location.href = "create_and_view_tickets.html"
-            // password = await response1.json();
-            alert("Correct Info");
-        } else {
-            alert("Oops");
-    }   
-}
+            alert("Incorrect Username or Password");
+        }
+    }
+
+
 </script>
 </html>

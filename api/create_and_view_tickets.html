@@ -4,18 +4,58 @@
     <title>create_and_view_tickets</title>
 </head>
 <body>
-    <button type="number" id="create" placeholder="Create a reimbursement ticket">
+    <button id="create">
+        Create a reimbursement ticket
     </button>
     <br>
-    <button type="number" id="view" placeholder="View your created tickets">
+    <button id="view">
+        View your reimbursement tickets
     </button>
     <br>
-    
+
 </body>
+
 <script>
-    function storedata(){
-        windows.localStorage.getItem(employee_id)
-        window.location.href = "create_and_view_tickets.html"
-        }
+
+    let id = window.localStorage.getItem("EmployeeId")
+
+    // const employeeInput = document.getElementById("create");
+    // const employeeInput = document.getElementById("create");
+
+
+    // let credentialsUnPw = {1: "username", 2: "password"}
+
+    // function addUsernamePassword(){
+    //     credentialsUnPw[1] = usernameInput.value;
+    //     console.log(usernameInput.value)
+    //     usernameInput.value = "";
+    //     credentialsUnPw[2] = passwordInput.value;
+    //     console.log(passwordInput.value)
+    //     passwordInput.value = "";
+    // }
+
+
+    // async function sendMessage(){
+
+    //     let config = {
+    //         method:"POST",
+    //         headers:{'Content-Type':"application/json"},
+    //         body: JSON.stringify(credentialsUnPw)
+    //     };
+
+    //     const response = await fetch("http://localhost:5000/body", config);
+    //     if(response.status === 200){
+    //         const id = await response.json();
+    //         window.localStorage.setItem("employeeId", id.employeeId);
+    //         window.location.href = "http://localhost:5000/create_and_view_tickets.html";
+    //         // username = await response.text();
+    //         // window.localStorage.setItem("text", username)
+    //         // window.location.href = "create_and_view_tickets.html"
+    //         // username = await response.json();
+    //     } else {
+    //         alert("Oops");
+    //     }
+    // }
+
 </script>
 </html>
