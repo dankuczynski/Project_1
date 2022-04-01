@@ -39,7 +39,8 @@ def sending_http_request_with_body():
 @app.post("/create_and_view_tickets")
 def making_and_seeing_tickets():
     body: dict = request.get_json()
-    
+    print(body)
+    return jsonify(body), 200
 
 
 
