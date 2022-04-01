@@ -2,9 +2,9 @@
 
 
 ### Best Practices:
-
+- use CRUD ope
 - Start off with the interface
-- Use proper naming conventions, no abbrevations: long form names in snake_case
+- Use proper naming conventions, no abbreviations: long form names in snake_case
 - Push to git a lot
 - 
 
@@ -38,6 +38,7 @@
 - Github/Git
 - Gitbash
 - Postman
+- Google Draw
 
 
 ### Scope
@@ -55,7 +56,7 @@
         ticket_status varchar(10),
         employee_id int foreign key,        
         reimbursement_reason varchar(100),
-        reimbursement_ticket_amount int
+        reimbursement_ticket_amount float
 
     );
 
@@ -86,7 +87,7 @@
             - get_ticket_status_invalid_data_type()
             - get_all_tickets_invalid_employee_id()
             - get_all_tickets_invalid_datatype()
-            
+
 
         - U:
         - Positive

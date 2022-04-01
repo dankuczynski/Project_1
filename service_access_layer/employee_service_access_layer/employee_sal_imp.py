@@ -10,8 +10,8 @@ class EmployeeSALImp(EmployeeSALInterface):
         cursor = connection.cursor()
         cursor.execute(sql, [username])
         record = cursor.fetchone()
-        if len(record) != 0:
+        if record is not None:
             employee = Employee(*record)
             return employee
         else:
-            raise BadEmployeeInfo("No employee record found")
+            raise BadEmployeeInfo("Invalid employee information")
