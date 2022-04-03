@@ -88,7 +88,7 @@ def test_create_ticket_reason_length():
 
 def test_get_all_ticket_by_ticket_number():
     result = ticket_dao.get_ticket_by_ticket_number(0)
-    assert result.employee_id == int
+    assert result.ticket_number == int
 
 
 def test_update_ticket_success():
@@ -108,7 +108,7 @@ def test_update_ticket_invalid_ticket_number():
 
 def test_update_ticket_invalid_data_type():
     try:
-        ticket = Ticket("four", 2, "travel", 500.00)
+        ticket = Ticket(1, 2, 1, 500.00)
         result = ticket_dao.update_ticket(ticket)
         assert False
     except BadTicketInfo as e:
@@ -123,7 +123,7 @@ def test_delete_ticket_success():
 
 def test_delete_ticket_invalid_data_type():
     try:
-        ticket = Ticket("one", 1, "I need money", 500.00)
+        ticket = Ticket(1, "two", "I need money", 500.00)
         result = ticket_dao.delete_ticket(0)
         assert False
     except BadTicketInfo as e:
@@ -132,7 +132,7 @@ def test_delete_ticket_invalid_data_type():
 
 def test_delete_ticket_invalid_ticket_number():
     try:
-        ticket = Ticket(1, "two", "Travel", 500.00)
+        ticket = Ticket("Two", 1, "Travel", 500.00)
         result = ticket_dao.delete_ticket(0)
         assert False
     except BadTicketInfo as e:
