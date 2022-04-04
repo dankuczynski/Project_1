@@ -12,3 +12,6 @@ class TicketSALInterface(ABC):
     def cancel_ticket(self, tick_number: int) -> Ticket:
         pass
 
+    @abstractmethod
+    def crate_ticket(self, ticket: Ticket) -> Ticket:
+        pass
