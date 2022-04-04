@@ -75,8 +75,16 @@ def viewing_tickets(employeeId: str):
     #service access layer to validate it
 
 
-@app.get("/tickets/delete/<ticket_num>")
+@app.delete("/tickets/delete/<ticket_num>")
 def deleting_ticket(ticket_num: str):
-    ticket_dao.delete_ticket(int(ticket_num))
+    try:
+        ticket_dao.delete_ticket(int(ticket_num))
+        return "deletion successful!"
+    except BadTicketInfo as e:
+        message = {
+            "message": str(e)
+        }
+        return jsonify(message), 400
+
 
 app.run()

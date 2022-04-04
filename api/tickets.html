@@ -20,6 +20,13 @@
        Logout from your account
     </button>
     <br>
+    <input type="text" id="deleteTicket" placeholder="Enter in a ticket number to delete it">
+    <br>
+    <button id="delete" onclick="deleteTickets()">
+        Deleting a ticket by ticket number
+    </button>
+
+    <br>
 
     <table>
         <thead id="head">
@@ -43,6 +50,9 @@
 // create ticket object from values in dictionary
 // pass it into service layer
 
+    const deleteATicket = document.getElementById("deleteTicket")
+
+    let ticketDeleteInput = {1: "deleteTicket"}
 
 
     const idInput = window.localStorage.getItem("employeeId");
@@ -104,11 +114,37 @@
                 row.innerHTML = `<td id="keyOne${idNum}">${obj.ticketNumber}</td><td id="keyTwo${idNum}">${obj.employeeId}</td><td id="keyThree${idNum}">${obj.reimbursementReason}</td><td id="keyFour${idNum}">${obj.reimbursementTicketAmount}</td>`
                 idNum++;
                 body.appendChild(row);
-           }   }
+           }   
+        }
         else {
             alert("Couldn't find tickets")
         }
     }
+
+    async function deleteTickets(){
+        
+        ticketDeleteInput[1] = deleteATicket.value;
+        console.log(deleteATicket.value);
+        deleteATicket.value = "";
+        
+
+        let config = {
+            method:"DELETE",
+            headers:{'Content-Type':"application/json"},
+            body: JSON.stringify(ticketDeleteInput)
+        };
+
+        const response = await fetch("http://localhost:5000/tickets/delete/" + str(deleteATicket), config);
+        if(response.status === 200){
+            const del = await response.json();
+            // username = await response.text();
+            // window.localStorage.setItem("text", username)
+            // window.location.href = "create_and_view_tickets.html"
+            // username = await response.json();
+} else {
+    alert("Either an incorrect ticket number or that ticket has already been deleted");
+}
+}
 
     async function logout(){
         window.localStorage.removeItem("EmployeeId");
