@@ -19,7 +19,7 @@ class TicketDAOImp(TicketDAOInterface):
             Ticket_number = cursor.fetchone()[0]
             return Ticket_number
         except ConnectionProblem as e:
-            raise str(e) == "There was a problem with the connection, please try again."
+            raise ConnectionProblem(str(e))
 
     def get_ticket_by_ticket_number(self, ticket_number: int):
         sql = "select * from ticket where ticket_number = %s"
@@ -41,7 +41,7 @@ class TicketDAOImp(TicketDAOInterface):
             tickets = []
             for record in records:
                 ticket = Ticket(*record)
-                tickets.append(ticket)
+                tickets.append(Ticket.ticket_dictionary_conversion(ticket))
             return tickets
         else:
             raise BadTicketInfo("No tickets found with that employee number were found")
@@ -67,4 +67,4 @@ class TicketDAOImp(TicketDAOInterface):
             else:
                 raise NothingDeleted("Ticket was not deleted")
         except ConnectionProblem as e:
-            raise str(e) == "There was a problem with the connection, please try again."
+            raise ConnectionProblem(str(e))

@@ -11,8 +11,9 @@ class EmployeeDAOImp(EmployeeDAOInterface):
         cursor = connection.cursor()
         cursor.execute(sql, [username])
         record = cursor.fetchone()
-        if len(record) != 0:
+        if record is not None:
             employee = Employee(*record)
+           # employee = Employee(1, "WillTest", "D03sThisW0rk?")
             return employee
         else:
             raise BadEmployeeInfo("Username was not found")

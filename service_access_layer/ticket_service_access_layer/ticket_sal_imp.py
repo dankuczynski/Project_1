@@ -5,7 +5,7 @@ from utils.manage_connection import connection
 
 class TicketSALImp(TicketSALInterface):
     def cancel_ticket(self, ticket_number: int) -> bool:
-        sql = "truncate * from ticket where ticket_number = %s"
+        sql = "delete * from ticket where ticket_number = %s"
         cursor = connection.cursor()
         cursor.execute(sql, [ticket_number])
         connection.commit()
@@ -14,4 +14,13 @@ class TicketSALImp(TicketSALInterface):
         else:
             raise BadTicketInfo("No ticket found with that ticket number")
 
-    def
+    def create_ticket(self, ticket: Ticket) -> Ticket:
+        if type(ticket.ticket_number) != int:
+            raise BadTicketInfo("")
+        if type(ticket.employee_id) != int:
+            raise BadTicketInfo("")
+        if type(ticket.reimbursement_reason) != str:
+            raise BadTicketInfo("")
+        if type(ticket.reimbursement_ticket_amount) != float:
+            raise BadTicketInfo("")
+
