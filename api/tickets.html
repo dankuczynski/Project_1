@@ -97,12 +97,14 @@
         if(response.status === 200){
             const allTickets = await response.json();
             console.log(allTickets)
-            for(let obj in allTickets);
-                console.log(allTickets[obj]);
+            for(let obj of allTickets){
+                console.log(obj);
                 const row = document.createElement("tr");
                 row.id = `row${idNum}`;
-                row.innerHTML = `<td id="keyOne${idNum}">${allTickets[obj].one}</td><td id="keyTwo${idNum}">${myResponseObj[obj].two}</td><td id="keyThree${idNum}">${myResponseObj[obj].three}</td>`
-        }
+                row.innerHTML = `<td id="keyOne${idNum}">${obj.ticketNumber}</td><td id="keyTwo${idNum}">${obj.employeeId}</td><td id="keyThree${idNum}">${obj.reimbursementReason}</td><td id="keyFour${idNum}">${obj.reimbursementTicketAmount}</td>`
+                idNum++;
+                body.appendChild(row);
+           }   }
         else {
             alert("Couldn't find tickets")
         }
