@@ -21,6 +21,15 @@
     </button>
     <br>
 
+    <table>
+        <thead id="head">
+
+        </thead>
+        <tbody id="body">
+
+        </tbody>
+    </table>
+
 </body>
 
 <script>
@@ -76,11 +85,23 @@
     }
     }
 
+        const head = document.getElementById("head");
+        const body = document.getElementById("body")
+
+        head.innerHTML = "<tr><th>Ticket Number</th><th>Employee Id</th><th>Reimbursement Reason</th><th>Reimbursement Ticket Amount</th></tr>"
+
+        let idNum = 1
+
     async function viewTickets(){
-        const response = await fetch(`http://localhost:5000/tickets/${idInput}`);
+        const response = await fetch(`http://localhost:5000/tickets/` + idInput);
         if(response.status === 200){
             const allTickets = await response.json();
             console.log(allTickets)
+            for(let obj in allTickets);
+                console.log(allTickets[obj]);
+                const row = document.createElement("tr");
+                row.id = `row${idNum}`;
+                row.innerHTML = `<td id="keyOne${idNum}">${allTickets[obj].one}</td><td id="keyTwo${idNum}">${myResponseObj[obj].two}</td><td id="keyThree${idNum}">${myResponseObj[obj].three}</td>`
         }
         else {
             alert("Couldn't find tickets")

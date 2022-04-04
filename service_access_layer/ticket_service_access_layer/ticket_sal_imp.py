@@ -13,5 +13,3 @@ class TicketSALImp(TicketSALInterface):
             return True
         else:
             raise BadTicketInfo("No ticket found with that ticket number")
-
-    def

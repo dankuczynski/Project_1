@@ -41,7 +41,7 @@ class TicketDAOImp(TicketDAOInterface):
             tickets = []
             for record in records:
                 ticket = Ticket(*record)
-                tickets.append(ticket)
+                tickets.append(Ticket.ticket_dictionary_conversion(ticket))
             return tickets
         else:
             raise BadTicketInfo("No tickets found with that employee number were found")
