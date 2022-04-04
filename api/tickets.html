@@ -6,13 +6,13 @@
 <body>
     <input type="text" id="reimbursementReason" placeholder="What is the reason you want a reimbursement">
     <br>
-    <input type="text" id="reimbursementTicketAmount" placeholder="How much do you need for reimbursement?">
+    <input type="text" id="reimbursementTicketAmount" placeholder="How much do you need for a reimbursement?">
     <br>
     <button id="create" onclick="addTicketToDatabase()">
         Create a reimbursement ticket
     </button>
     <br>
-    <button id="view" onclick="">
+    <button id="view" onclick="viewTickets()">
         View your reimbursement tickets
     </button>
     <br>
@@ -20,9 +20,7 @@
        Logout from your account
     </button>
     <br>
-    <p id="viewOneTicket">
-        
-    </p>
+
 </body>
 
 <script>
@@ -63,7 +61,8 @@
 
     const response = await fetch("http://localhost:5000/tickets", config);
     if(response.status === 200){
-        const ticket = await response.json();
+        const singleTicket = await response.json();
+        console.log(singleTicket)
         // window.localStorage.setItem("singleTicket", ticket.singleTicket);
         // alert(`Your Ticket: ${window.localStorage.getItem(singleTicket)}`)
         // window.localStorage.setItem("employeeId", id.employeeId);
@@ -90,7 +89,7 @@
 
     async function logout(){
         window.localStorage.removeItem("EmployeeId");
-        window.localStorage.removeItem("singleTicket")
+        window.localStorage.removeItem("singleTicket");
         window.location.href = "login.html";
     }
     // const employeeInput = document.getElementById("create");

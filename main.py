@@ -57,6 +57,7 @@ def making_tickets():
 def viewing_tickets(employeeId: str):
     body: dict = request.get_json()
     tickets = ticket_dao.get_all_ticket_by_employee_id(int(employeeId))
+    print(tickets)
     # service layer to handle conversion
     # service layer to turn into Ticket objects into dictionaries
     # list of dictionaries and jsonify them
