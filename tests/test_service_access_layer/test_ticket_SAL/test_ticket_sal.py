@@ -1,5 +1,5 @@
 from custom_exceptions.cancellation_fail import CancellationFail
-from data_access_layer.ticket_dao.ticket_dao_imp import TicketDAOImp
+from data_access_layer.ticket_dao.ticket_imp import TicketDAOImp
 from entities.Ticket import Ticket
 from service_access_layer.ticket_service_access_layer.ticket_sal_imp import TicketSALImp
 ticket_dao = TicketDAOImp()

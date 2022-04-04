@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>create_and_view_tickets</title>
+</head>
+<body>
+    <input type="text" id="reimbursementReason" placeholder="What is the reason you want a reimbursement">
+    <br>
+    <input type="text" id="reimbursementTicketAmount" placeholder="How much do you need for a reimbursement?">
+    <br>
+    <button id="create" onclick="addTicketToDatabase()">
+        Create a reimbursement ticket
+    </button>
+    <br>
+    <button id="view" onclick="viewTickets()">
+        View your reimbursement tickets
+    </button>
+    <br>
+    <button id="logout" onclick="logout()">
+       Logout from your account
+    </button>
+    <br>
+    <input type="text" id="deleteTicket" placeholder="Enter in a ticket number to delete it">
+    <br>
+    <button id="delete" onclick="deleteTickets()">
+        Deleting a ticket by ticket number
+    </button>
+
+    <br>
+
+    <table>
+        <thead id="head">
+
+        </thead>
+        <tbody id="body">
+
+        </tbody>
+    </table>
+
+</body>
+
+<script>
+//In JavaScript:
+// get the ticket info from the employee and place it in an object
+// pass that object through the JSON.stringify method
+// place it in the body of the http request
+
+// In python:
+// convert the json into a dictionary
+// create ticket object from values in dictionary
+// pass it into service layer
+
+    const deleteATicket = document.getElementById("deleteTicket")
+
+    let ticketDeleteInput = {1: "deleteTicket"}
+
+
+    const idInput = window.localStorage.getItem("employeeId");
+    const reimbursementReasonInput = document.getElementById("reimbursementReason");
+    const reimbursementTicketAmountInput = document.getElementById("reimbursementTicketAmount");
+
+    let ticketObject = {1: "employeeId", 2: "reimbursementReason", 3: "reimbursementTicketAmount"}
+
+    async function addTicketToDatabase(){
+            ticketObject[1] = idInput;
+            console.log(idInput);
+            ticketObject[2] = reimbursementReasonInput.value;
+            console.log(reimbursementReasonInput.value);
+            reimbursementReasonInput.value = "";
+            ticketObject[3] = reimbursementTicketAmountInput.value
+            console.log(reimbursementTicketAmountInput.value);
+            reimbursementTicketAmountInput.value = "";
+    
+
+    let config = {
+        method:"POST",
+        headers:{'Content-Type':"application/json"},
+        body: JSON.stringify(ticketObject)
+    };
+
+    const response = await fetch("http://localhost:5000/tickets", config);
+    if(response.status === 200){
+        const singleTicket = await response.json();
+        console.log(singleTicket)
+        // window.localStorage.setItem("singleTicket", ticket.singleTicket);
+        // alert(`Your Ticket: ${window.localStorage.getItem(singleTicket)}`)
+        // window.localStorage.setItem("employeeId", id.employeeId);
+        // window.location.href = "\create_and_view_tickets.html";
+        // username = await response.text();
+        // window.localStorage.setItem("text", username)
+        // window.location.href = "create_and_view_tickets.html"
+        // username = await response.json();
+    } else {
+        alert("Incorrect ticket information");
+    }
+    }
+
+        const head = document.getElementById("head");
+        const body = document.getElementById("body")
+
+        head.innerHTML = "<tr><th>Ticket Number</th><th>Employee Id</th><th>Reimbursement Reason</th><th>Reimbursement Ticket Amount</th></tr>"
+
+        let idNum = 1
+
+    async function viewTickets(){
+        const response = await fetch(`http://localhost:5000/tickets/` + idInput);
+        if(response.status === 200){
+            const allTickets = await response.json();
+            console.log(allTickets)
+            for(let obj of allTickets){
+                console.log(obj);
+                const row = document.createElement("tr");
+                row.id = `row${idNum}`;
+                row.innerHTML = `<td id="keyOne${idNum}">${obj.ticketNumber}</td><td id="keyTwo${idNum}">${obj.employeeId}</td><td id="keyThree${idNum}">${obj.reimbursementReason}</td><td id="keyFour${idNum}">${obj.reimbursementTicketAmount}</td>`
+                idNum++;
+                body.appendChild(row);
+           }   
+        }
+        else {
+            alert("Couldn't find tickets")
+        }
+    }
+
+    async function deleteTickets(){
+        
+        ticketDeleteInput[1] = deleteATicket.value;
+        console.log(deleteATicket.value);
+        deleteATicket.value = "";
+        
+
+        let config = {
+            method:"DELETE",
+            headers:{'Content-Type':"application/json"},
+            body: JSON.stringify(ticketDeleteInput)
+        };
+
+        const response = await fetch("http://localhost:5000/tickets/delete/" + str(deleteATicket), config);
+        if(response.status === 200){
+            const del = await response.json();
+            // username = await response.text();
+            // window.localStorage.setItem("text", username)
+            // window.location.href = "create_and_view_tickets.html"
+            // username = await response.json();
+} else {
+    alert("Either an incorrect ticket number or that ticket has already been deleted");
+}
+}
+
+    async function logout(){
+        window.localStorage.removeItem("EmployeeId");
+        window.localStorage.removeItem("singleTicket");
+        window.location.href = "login.html";
+    }
+    // const employeeInput = document.getElementById("create");
+    // const employeeInput = document.getElementById("create");
+
+
+    // let credentialsUnPw = {1: "username", 2: "password"}
+
+    // function addUsernamePassword(){
+    //     credentialsUnPw[1] = usernameInput.value;
+    //     console.log(usernameInput.value)
+    //     usernameInput.value = "";
+    //     credentialsUnPw[2] = passwordInput.value;
+    //     console.log(passwordInput.value)
+    //     passwordInput.value = "";
+    // }
+
+
+    // async function sendMessage(){
+
+    //     let config = {
+    //         method:"POST",
+    //         headers:{'Content-Type':"application/json"},
+    //         body: JSON.stringify(credentialsUnPw)
+    //     };
+
+    //     const response = await fetch("http://localhost:5000/body", config);
+    //     if(response.status === 200){
+    //         const id = await response.json();
+    //         window.localStorage.setItem("employeeId", id.employeeId);
+    //         window.location.href = "http://localhost:5000/create_and_view_tickets.html";
+    //         // username = await response.text();
+    //         // window.localStorage.setItem("text", username)
+    //         // window.location.href = "create_and_view_tickets.html"
+    //         // username = await response.json();
+    //     } else {
+    //         alert("Oops");
+    //     }
+    // }
+
+</script>
+</html>

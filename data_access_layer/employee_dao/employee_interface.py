@@ -12,3 +12,7 @@ class EmployeeDAOInterface(ABC):
     @abstractmethod
     def reading_password(self, password: str) -> Employee:
         pass
+
+    @abstractmethod
+    def employee_id_username_password_match(self, username: str, password: str) -> int:
+        pass
