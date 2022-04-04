@@ -23,4 +23,3 @@ class TicketSALImp(TicketSALInterface):
             raise BadTicketInfo("")
         if type(ticket.reimbursement_ticket_amount) != float:
             raise BadTicketInfo("")
-
