@@ -1,3 +1,5 @@
+from typing import List
+
 from custom_exceptions.bad_ticket_info import BadTicketInfo
 from custom_exceptions.connection_problem import ConnectionProblem
 from custom_exceptions.nothing_deleted import NothingDeleted
@@ -15,13 +17,12 @@ class TicketDAOImp(TicketDAOInterface):
             cursor.execute(sql, (employee_id, reimbursement_reason, reimbursement_ticket_amount))
             connection.commit()
             Ticket_number = cursor.fetchone()[0]
-            # ticket_number = returned_id
             return Ticket_number
         except ConnectionProblem as e:
             raise str(e) == "There was a problem with the connection, please try again."
 
     def get_ticket_by_ticket_number(self, ticket_number: int):
-        sql = "select * ticket where ticket_number = %s"
+        sql = "select * from ticket where ticket_number = %s"
         cursor = connection.cursor()
         cursor.execute(sql[ticket_number])
         record = cursor.fetchone()
@@ -31,14 +32,17 @@ class TicketDAOImp(TicketDAOInterface):
         else:
             raise BadTicketInfo("Not ticket with that ticket number was found")
 
-    def get_all_ticket_by_employee_id(self, employee_id: int):
-        sql = "select * ticket where employee_id = %s"
+    def get_all_ticket_by_employee_id(self, employee_id: int) -> List[Ticket]:
+        sql = "select * from ticket where employee_id = %s"
         cursor = connection.cursor()
         cursor.execute(sql, [employee_id])
-        record = cursor.fetchone()
-        if len(record) != 0:
-            ticket = Ticket(*record)
-            return ticket
+        records = cursor.fetchall()
+        if len(records) != 0:
+            tickets = []
+            for record in records:
+                ticket = Ticket(*record)
+                tickets.append(ticket)
+            return tickets
         else:
             raise BadTicketInfo("No tickets found with that employee number were found")
 
