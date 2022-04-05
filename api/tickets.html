@@ -75,23 +75,16 @@
         headers:{'Content-Type':"application/json"},
         body: JSON.stringify(ticketObject)
     };
-
+    
     const response = await fetch("http://localhost:5000/tickets", config);
     if(response.status === 200){
         const singleTicket = await response.json();
         console.log(singleTicket)
-        // window.localStorage.setItem("singleTicket", ticket.singleTicket);
-        // alert(`Your Ticket: ${window.localStorage.getItem(singleTicket)}`)
-        // window.localStorage.setItem("employeeId", id.employeeId);
-        // window.location.href = "\create_and_view_tickets.html";
-        // username = await response.text();
-        // window.localStorage.setItem("text", username)
-        // window.location.href = "create_and_view_tickets.html"
-        // username = await response.json();
+        alert("Ticket reimbursement submission successful!")
     } else {
         alert("Incorrect ticket information");
     }
-    }
+}
 
         const head = document.getElementById("head");
         const body = document.getElementById("body")
@@ -134,15 +127,11 @@
             headers:{'Content-Type':"application/json"},
             body: JSON.stringify(ticketDeleteInput)
         };
-
+        
         const response = await fetch("http://localhost:5000/tickets/delete/" + deleteATicket.value, config);
         if(response.status === 200){
             const del = await response.json();
             alert("Ticket has been deleted successfully")
-            // username = await response.text();
-            // window.localStorage.setItem("text", username)
-            // window.location.href = "create_and_view_tickets.html"
-            // username = await response.json();
 } else {
     alert("Either an incorrect ticket number or that ticket has already been deleted");
 }
@@ -153,43 +142,6 @@
         window.localStorage.removeItem("singleTicket");
         window.location.href = "login.html";
     }
-    // const employeeInput = document.getElementById("create");
-    // const employeeInput = document.getElementById("create");
-
-
-    // let credentialsUnPw = {1: "username", 2: "password"}
-
-    // function addUsernamePassword(){
-    //     credentialsUnPw[1] = usernameInput.value;
-    //     console.log(usernameInput.value)
-    //     usernameInput.value = "";
-    //     credentialsUnPw[2] = passwordInput.value;
-    //     console.log(passwordInput.value)
-    //     passwordInput.value = "";
-    // }
-
-
-    // async function sendMessage(){
-
-    //     let config = {
-    //         method:"POST",
-    //         headers:{'Content-Type':"application/json"},
-    //         body: JSON.stringify(credentialsUnPw)
-    //     };
-
-    //     const response = await fetch("http://localhost:5000/body", config);
-    //     if(response.status === 200){
-    //         const id = await response.json();
-    //         window.localStorage.setItem("employeeId", id.employeeId);
-    //         window.location.href = "http://localhost:5000/create_and_view_tickets.html";
-    //         // username = await response.text();
-    //         // window.localStorage.setItem("text", username)
-    //         // window.location.href = "create_and_view_tickets.html"
-    //         // username = await response.json();
-    //     } else {
-    //         alert("Oops");
-    //     }
-    // }
 
 </script>
 </html>
