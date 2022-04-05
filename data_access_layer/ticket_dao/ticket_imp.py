@@ -60,7 +60,7 @@ class TicketDAOImp(TicketDAOInterface):
         try:
             sql = "delete from ticket where ticket_number = %s"
             cursor = connection.cursor()
-            cursor.execute(sql[ticket_number])
+            cursor.execute(sql, [ticket_number])
             connection.commit()
             if cursor.rowcount != 0:
                 return True
