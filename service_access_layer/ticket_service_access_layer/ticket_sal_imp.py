@@ -17,10 +17,15 @@ class TicketSALImp(TicketSALInterface):
 
     def create_ticket(self, ticket: Ticket) -> Ticket:
         if type(ticket.ticket_number) != int:
-            raise BadTicketInfo("")
+            raise BadTicketInfo("Ticket number invalid")
         if type(ticket.employee_id) != int:
-            raise BadTicketInfo("")
+            raise BadTicketInfo("Employee ID invalid")
         if type(ticket.reimbursement_reason) != str:
-            raise BadTicketInfo("")
+            raise BadTicketInfo("Reason type invalid")
         if type(ticket.reimbursement_ticket_amount) != float:
-            raise BadTicketInfo("")
+            raise BadTicketInfo("Amount value invalid")
+        if len(ticket.reimbursement_reason) > 100:
+            raise BadTicketInfo("Reason is too long")
+        if ticket.reimbursement_ticket_amount > 1000.00:
+            raise BadTicketInfo("Ticket amount invalid")
+        
