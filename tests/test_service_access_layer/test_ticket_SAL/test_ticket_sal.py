@@ -6,15 +6,17 @@ from service_access_layer.ticket_service_access_layer.ticket_sal_imp import Tick
 
 ticket_dao = TicketDAOImp()
 ticket_service = TicketSALImp(ticket_dao)
-non_int_employee_id = Ticket(1, "Two", "I need ticket for food", 50.00)
-non_str_reimbursement_reason = Ticket(1, 2, 1000, 50.00)
-non_float_ticket_amount = Ticket(1, 2, "I need ticket for food", "Five")
-
+non_int_employee_id = Ticket("Two", "I need ticket for food", 50.00)
+non_str_reimbursement_reason = Ticket(2, 1000, 50.00)
+reimbursement_reason_length = Ticket(2, "I need ticket for food!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", 50)
+non_float_ticket_amount = Ticket(2, "I need ticket for food", "Five")
+ticket_amount_over_limit = Ticket(2, "I need ticket for food", 2500)
+ticket_amount_under_limit = Ticket(2, "I need ticket for food", 0)
 
 
 def test_check_non_int_employee_id():
     try:
-        ticket_service.create_ticket(non_int_employee_id)
+        ticket_service.create_ticket_sal(non_int_employee_id)
         assert False
     except BadTicketInfo as e:
         assert str(e) == "Please pass valid employee Id"
@@ -22,7 +24,7 @@ def test_check_non_int_employee_id():
 
 def test_check_non_str_reimbursement_reason():
     try:
-        ticket_service.create_ticket(non_str_reimbursement_reason)
+        ticket_service.create_ticket_sal(non_str_reimbursement_reason)
         assert False
     except BadTicketInfo as e:
         assert str(e) == "Please pass valid reimbursement reason"
@@ -30,17 +32,34 @@ def test_check_non_str_reimbursement_reason():
 
 def test_check_reimbursement_reason_length():
     try:
-        pass
-    except:
-        pass
+        ticket_service.create_ticket_sal(reimbursement_reason_length)
+        assert False
+    except BadTicketInfo as e:
+        assert str(e) == "reimbursement reason length is too long"
 
 
 def test_check_non_float_ticket_amount():
     try:
-        ticket_service.create_ticket(non_float_ticket_amount)
+        ticket_service.create_ticket_sal(non_float_ticket_amount)
         assert False
     except BadTicketInfo as e:
         assert str(e) == "Please pass valid ticket amount"
+
+
+def test_check_ticket_amount_over_limit():
+    try:
+        ticket_service.create_ticket_sal(ticket_amount_over_limit)
+        assert False
+    except BadTicketInfo as e:
+        assert str(e) == "reimbursement amount is over limit"
+
+
+def test_check_ticket_amount_under_limit():
+    try:
+        ticket_service.create_ticket_sal(ticket_amount_under_limit)
+        assert False
+    except BadTicketInfo as e:
+        assert str(e) == "reimbursement amount is under limit"
 
 
 """
