@@ -75,4 +75,4 @@ def test_delete_ticket_invalid_ticket_number():
         result = ticket_dao.delete_ticket(-1)
         assert False
     except BadTicketInfo as e:
-        assert str(e) == "Incorrect ticket information"
+        assert str(e) == "Ticket number invalid"
