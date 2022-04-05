@@ -16,7 +16,7 @@ def test_create_ticket_invalid_reimbursement_reason():
         result = ticket_dao.create_ticket(1, 100, 500.00)
         assert result != int
     except BadTicketInfo as e:
-        assert str(e) == "Incorrect ticket information"
+        assert str(e) == "Reason type invalid"
 
 
 def test_create_ticket_empty_string():
@@ -24,7 +24,7 @@ def test_create_ticket_empty_string():
         result = ticket_dao.create_ticket(1, "", 500.00)
         assert result != ""
     except BadTicketInfo as e:
-        assert str(e) == "Incorrect ticket information"
+        assert str(e) == "Ticket amount invalid"
 
 
 def test_create_ticket_excess_amount():
@@ -32,7 +32,7 @@ def test_create_ticket_excess_amount():
         result = ticket_dao.create_ticket(1, "travel", 2000.00)
         assert result <= 1000.00
     except BadTicketInfo as e:
-        assert str(e) == "Incorrect ticket information"
+        assert str(e) == "Ticket amount invalid"
 
 
 def test_create_ticket_equal_less_than_zero_amount():
@@ -40,7 +40,7 @@ def test_create_ticket_equal_less_than_zero_amount():
         result = ticket_dao.create_ticket(1, "transport", 0)
         assert result > 0
     except BadTicketInfo as e:
-        assert str(e) == "Incorrect ticket information"
+        assert str(e) == "Amount value invalid"
 
 
 # def test_create_ticket_reason_length():
@@ -67,12 +67,12 @@ def test_delete_ticket_invalid_data_type():
         result = ticket_dao.delete_ticket("two")
         assert False
     except BadTicketInfo as e:
-        assert str(e) == "Incorrect Ticket information"
+        assert str(e) == "Ticket number invalid"
 
 
 def test_delete_ticket_invalid_ticket_number():
     try:
         result = ticket_dao.delete_ticket(-1)
-        assert result != str
+        assert False
     except BadTicketInfo as e:
         assert str(e) == "Incorrect ticket information"
