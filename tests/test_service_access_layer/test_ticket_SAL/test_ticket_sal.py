@@ -6,18 +6,10 @@ from service_access_layer.ticket_service_access_layer.ticket_sal_imp import Tick
 
 ticket_dao = TicketDAOImp()
 ticket_service = TicketSALImp(ticket_dao)
-non_int_ticket_number = Ticket("A", 20, "I need ticket for food", 50.00)
 non_int_employee_id = Ticket(1, "Two", "I need ticket for food", 50.00)
 non_str_reimbursement_reason = Ticket(1, 2, 1000, 50.00)
 non_float_ticket_amount = Ticket(1, 2, "I need ticket for food", "Five")
 
-
-def test_check_non_int_ticket_number():
-    try:
-        ticket_service.create_ticket(non_int_ticket_number)
-        assert False
-    except BadTicketInfo as e:
-        assert str(e) == "Please pass valid ticket number"
 
 
 def test_check_non_int_employee_id():
