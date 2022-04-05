@@ -43,44 +43,21 @@ def test_create_ticket_equal_less_than_zero_amount():
         assert str(e) == "Incorrect ticket information"
 
 
-def test_create_ticket_reason_length():
-    try:
-        result = ticket_dao.create_ticket(1,
-                        "Travel ticket from washington to boston asdlkfjsdajlk;fjasdlkf;jsaed;flkasj df ;lkasejdf;laskdjf;lsadixjfsdal;kjfsadfasedfsdfasdflkjasd;lkfjwaeolkjras;lkdjf;sdlkfja;lsdkjf;sdalkjf;asldkjfas;ldkjf",
-                        500.00)
-        assert result <= 100
-    except BadTicketInfo as e:
-        assert str(e) == "too long ticket information"
+# def test_create_ticket_reason_length():
+#     try:
+#         result = ticket_dao.create_ticket(1,
+#                         "Travel ticket from washington to boston asdlkfjsdajlk;fjasdlkf;jsaed;flkasj df ;lkasejdf;laskdjf;lsadixjfsdal;kjfsadfasedfsdfasdflkjasd;lkfjwaeolkjras;lkdjf;sdlkfja;lsdkjf;sdalkjf;asldkjfas;ldkjf",
+#                         500.00)
+#         assert result <= 100
+#     except BadTicketInfo as e:
+#         assert str(e) == "too long ticket information"
 
 
-def test_get_all_ticket_by_ticket_number():
-    result = ticket_dao.get_ticket_by_ticket_number(0)
-    assert result.ticket_number == int
-
-
-def test_update_ticket_success():
-    result = ticket_dao.update_ticket(60, "I need money", 500.00)
-    assert result.ticket_number >= 1
-
-
-def test_update_ticket_invalid_ticket_number():
-    try:
-        result = ticket_dao.update_ticket(1, "two", 500.00)
-        assert result != str
-    except BadTicketInfo as e:
-        assert str(e) == "Incorrect Ticket information"
-
-
-def test_update_ticket_invalid_data_type():
-    try:
-        result = ticket_dao.update_ticket(2, 1, 500.00)
-        assert False
-    except BadTicketInfo as e:
-        assert str(e) == "Incorrect Ticket information"
-
+def test_get_all_ticket_by_employee_id():
+    result = ticket_dao.get_all_ticket_by_employee_id(1)
+    assert len(result) >= 1
 
 def test_delete_ticket_success():
-    ticket = Ticket(1, 1, "Travel", 500.00)
     result = ticket_dao.delete_ticket(0)
     assert result
 
@@ -95,7 +72,7 @@ def test_delete_ticket_invalid_data_type():
 
 def test_delete_ticket_invalid_ticket_number():
     try:
-        result = ticket_dao.delete_ticket("two")
+        result = ticket_dao.delete_ticket(-1)
         assert result != str
     except BadTicketInfo as e:
         assert str(e) == "Incorrect ticket information"
