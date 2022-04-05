@@ -22,7 +22,7 @@ employee_service = EmployeeSALImp(employee_dao)
 ticket_dao = TicketDAOImp()
 ticket_service = TicketSALImp(ticket_dao)
 
-@app.post("/body")
+@app.post("/login")
 def sending_http_request_with_body():
     try:
         body: dict = request.get_json()
@@ -42,9 +42,6 @@ def making_tickets():
    # return that ConnectionProblem as json
     try:
         body: dict = request.get_json()
-        # print(body)
-        # return jsonify(body)
-        print(body)
         ticket_num = ticket_dao.create_ticket(int(body["1"]), body["2"], float(body["3"]))
         ticket_num_dictionary = {"ticketNumber": ticket_num}
         return jsonify(ticket_num_dictionary)
@@ -59,7 +56,6 @@ def making_tickets():
 def viewing_tickets(employeeId: str):
     try:
         tickets = ticket_dao.get_all_ticket_by_employee_id(int(employeeId))
-        # print(tickets)
         tickets = jsonify(tickets)
         return tickets, 200
     except BadEmployeeInfo as e:
@@ -79,7 +75,8 @@ def viewing_tickets(employeeId: str):
 def deleting_ticket(ticket_num: str):
     try:
         ticket_dao.delete_ticket(int(ticket_num))
-        return "deletion successful!"
+        delete_dictionary = {1: "Deletion successful!"}
+        return jsonify(delete_dictionary), 200
     except BadTicketInfo as e:
         message = {
             "message": str(e)
