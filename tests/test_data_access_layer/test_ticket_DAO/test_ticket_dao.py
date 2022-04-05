@@ -7,8 +7,7 @@ ticket_dao = TicketDAOImp()
 
 
 def test_create_ticket_success():
-    ticket = Ticket(1, 1, "I need money", 500.00)
-    result = ticket_dao.create_ticket(ticket)
+    result = ticket_dao.create_ticket(1, "reimbursement_reason", 500.00)
     assert result.ticket_number == 1
 
 
