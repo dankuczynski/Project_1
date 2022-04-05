@@ -8,6 +8,8 @@ class TicketSALImp(TicketSALInterface):
     def cancel_ticket(self, ticket_number: int) -> bool:
         if type(ticket_number) != int:
             raise BadTicketInfo("Ticket number invalid")
+        if ticket_number < 0:
+            raise BadTicketInfo("Ticket number invalid")
         else:
             return True
 
