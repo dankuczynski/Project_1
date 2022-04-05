@@ -1,4 +1,5 @@
 from custom_exceptions.bad_ticket_info import BadTicketInfo
+
 from entities import Ticket
 from service_access_layer.ticket_service_access_layer.ticket_sal_interface import TicketSALInterface
 from utils.manage_connection import connection

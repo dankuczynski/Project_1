@@ -13,5 +13,9 @@ class TicketSALInterface(ABC):
         pass
 
     @abstractmethod
-    def crate_ticket(self, ticket: Ticket) -> Ticket:
+    def create_ticket(self, ticket: Ticket) -> Ticket:
+        pass
+
+    @abstractmethod
+    def get_by_employee_id(self, employee_id: int) -> Ticket:
         pass
