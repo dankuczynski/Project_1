@@ -25,17 +25,6 @@ class TicketDAOImp(TicketDAOInterface):
         except ConnectionProblem as e:
             raise ConnectionProblem(str(e))
 
-    def get_ticket_by_ticket_number(self, ticket_number: int):
-        sql = "select * from ticket where ticket_number = %s"
-        cursor = connection.cursor()
-        cursor.execute(sql[ticket_number])
-        record = cursor.fetchone()
-        if len(record) != 0:
-            ticket = Ticket(*record)
-            return ticket
-        else:
-            raise BadTicketInfo("Not ticket with that ticket number was found")
-
     def get_all_ticket_by_employee_id(self, employee_id: int) -> List[Ticket]:
         sql = "select * from ticket where employee_id = %s"
         cursor = connection.cursor()
@@ -50,25 +39,17 @@ class TicketDAOImp(TicketDAOInterface):
         else:
             raise BadTicketInfo("No tickets found with that employee number were found")
 
-    def update_ticket(self, ticket: Ticket) -> Ticket:
-        sql = "update * ticket where ticket_number = %s"
-        cursor = connection.cursor()
-        cursor.execute(sql, [ticket.reimbursement_reason, ticket.reimbursement_ticket_amount])
-        connection.commit()
-        if cursor.rowcount != 0:
-            return ticket
-        else:
-            raise BadTicketInfo("No ticket with that ticket number was found")
-
     def delete_ticket(self, ticket_number: int):
         try:
-            sql = "delete from ticket where ticket_number = %s"
-            cursor = connection.cursor()
-            cursor.execute(sql, [ticket_number])
-            connection.commit()
-            if cursor.rowcount != 0:
-                return True
-            else:
-                raise NothingDeleted("Ticket was not deleted")
+            if ticket_sal.cancel_ticket(ticket_number)
+                sql = "delete from ticket where ticket_number = %s"
+                cursor = connection.cursor()
+                cursor.execute(sql, [ticket_number])
+                connection.commit()
+                if cursor.rowcount != 0:
+                    return True
+                else:
+                    raise NothingDeleted("Ticket was not deleted")
         except ConnectionProblem as e:
             raise ConnectionProblem(str(e))
+
