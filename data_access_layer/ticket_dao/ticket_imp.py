@@ -10,7 +10,7 @@ from utils.manage_connection import connection
 
 class TicketDAOImp(TicketDAOInterface):
 
-    def create_ticket(self, employee_id, reimbursement_reason, reimbursement_ticket_amount):
+    def create_ticket(self, employee_id: int, reimbursement_reason: str, reimbursement_ticket_amount: float):
         try:
             sql = "insert into ticket values(default, %s, %s, %s) returning ticket_number"
             cursor = connection.cursor()
