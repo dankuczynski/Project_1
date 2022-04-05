@@ -31,9 +31,3 @@ class TicketSALImp(TicketSALInterface):
             raise BadTicketInfo("")
         else:
             return Ticket
-
-        # get list of ticket objects
-        # make list to hold tickets as dictionaries
-        # iterate through tickets, convert to dictionaries, store in dictionary list
-        # send dictionary list to API for jsonify method
-

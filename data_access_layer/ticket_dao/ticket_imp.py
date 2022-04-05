@@ -41,7 +41,7 @@ class TicketDAOImp(TicketDAOInterface):
 
     def delete_ticket(self, ticket_number: int):
         try:
-            if ticket_sal.cancel_ticket(ticket_number)
+            if ticket_sal.cancel_ticket(ticket_number):
                 sql = "delete from ticket where ticket_number = %s"
                 cursor = connection.cursor()
                 cursor.execute(sql, [ticket_number])
