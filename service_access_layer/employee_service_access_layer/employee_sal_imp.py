@@ -17,4 +17,5 @@ class EmployeeSALImp(EmployeeSALInterface):
             raise BadEmployeeInfo("Invalid employee information")
 
     def username_password_data_type_check(self, username: str, password: str):
+        # needs to verify that username and password match each other and what is in DB
         pass
