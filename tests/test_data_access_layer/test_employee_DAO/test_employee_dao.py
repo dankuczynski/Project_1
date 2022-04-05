@@ -21,12 +21,12 @@ def test_read_employee_username_invalid_id():
 
 def test_read_employee_password_by_id():
     result = employee_dao.reading_password("D03sThisW0rk?")
-    assert True
+    assert result
 
 
 def test_read_employee_password_invalid_id():
     try:
-        result = employee_dao.reading_password(2)
+        result = employee_dao.reading_password("one")
         assert False
     except BadEmployeeInfo as e:
         assert str(e) == "Incorrect Employee information"
