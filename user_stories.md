@@ -1,6 +1,6 @@
 ### User Stories
 
-    - As an employee, I should be able to log in.
+    - As an employee, I should be able to log in.(S-A)
         Given: Employee is on Employee Login page
         When: Employee pushes log in button
         When: Employee enters username
