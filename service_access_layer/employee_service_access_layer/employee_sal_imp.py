@@ -6,7 +6,7 @@ from utils.manage_connection import connection
 
 class EmployeeSALImp(EmployeeSALInterface):
     def user_account_access(self, username: str, password: str) -> Employee:
-        sql = "select password from employee where username = %s"
+        sql = "select * from employee where username = %s"
         cursor = connection.cursor()
         cursor.execute(sql, [username])
         record = cursor.fetchone()
