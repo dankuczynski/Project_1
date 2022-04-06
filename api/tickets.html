@@ -65,7 +65,7 @@
             ticketObject[2] = reimbursementReasonInput.value;
             console.log(reimbursementReasonInput.value);
             reimbursementReasonInput.value = "";
-            ticketObject[3] = reimbursementTicketAmountInput.value
+            ticketObject[3] = reimbursementTicketAmountInput.value;
             console.log(reimbursementTicketAmountInput.value);
             reimbursementTicketAmountInput.value = "";
     
@@ -80,7 +80,7 @@
     if(response.status === 200){
         const singleTicket = await response.json();
         console.log(singleTicket)
-        alert("Ticket reimbursement submission successful!")
+        alert("Ticket reimbursement submission successful!");
     } else {
         alert("Incorrect ticket information");
     }
@@ -95,6 +95,7 @@
     
 
     async function viewTickets(){
+        body.innerHTML = ''
         const response = await fetch(`http://localhost:5000/tickets/` + idInput);
         if(response.status === 200){
             const allTickets = await response.json();
@@ -119,7 +120,7 @@
 
         ticketDeleteInput[1] = deleteATicket.value;
         console.log(deleteATicket.value);
-        // deleteATicket.value = "";
+        
         
 
         let config = {
@@ -132,9 +133,10 @@
         if(response.status === 200){
             const del = await response.json();
             alert("Ticket has been deleted successfully")
+            deleteATicket.value = "";
 } else {
     alert("Either an incorrect ticket number or that ticket has already been deleted");
-}
+    }
 }
 
     async function logout(){

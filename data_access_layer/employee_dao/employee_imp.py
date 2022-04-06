@@ -34,7 +34,7 @@ class EmployeeDAOImp(EmployeeDAOInterface):
         cursor = connection.cursor()
         cursor.execute(sql, [username, password])
         record = cursor.fetchone()
-        if len(record) != 0:
+        if record is not None:
             employee_id = record[0]
             return employee_id
         else:
