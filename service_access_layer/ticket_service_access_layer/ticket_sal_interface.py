@@ -17,5 +17,5 @@ class TicketSALInterface(ABC):
         pass
 
     @abstractmethod
-    def get_by_employee_id(self, ticket: Ticket):
+    def get_by_employee_id(self, employee_id: int, ticket_number:int):
         pass
