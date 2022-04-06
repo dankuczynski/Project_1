@@ -28,8 +28,10 @@ class TicketSALImp(TicketSALInterface):
             raise BadTicketInfo("Ticket amount invalid")
         return True
 
-    def get_by_employee_id(self, employee_id: int) -> Ticket:
+    def get_by_employee_id(self, employee_id: int, ticket_number: int):
         if type(employee_id) != int:
-            raise BadTicketInfo("")
+            raise BadTicketInfo("Invalid Employee ID")
+        if type(ticket_number) != int:
+            raise BadTicketInfo("Invalid Ticket ID")
         else:
             return Ticket

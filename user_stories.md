@@ -1,6 +1,6 @@
 ### User Stories
 
-    - As an employee, I should be able to log in.(S-A)
+    - As an employee, I should be able to log in.()
         Given: Employee is on Employee Login page
         When: Employee pushes log in button
         When: Employee enters username
@@ -25,15 +25,15 @@
         When: Employee enters password
         Then: Employee has submitted ticket
 
-    - As an employee, I should be able to cancel a ticket.
+    - As an employee, I should be able to delete a ticket.
         Give: Employee is on Account page
         When: Employee selects pending ticket
-        When: Employee selects cancel ticket
+        When: Employee selects delete ticket
         When: Employee enters username
         When: Employee enters password
         Then: Employee cancels ticket
 
-    - As an employee, I should be able to see ticket(s) status.
+    - As an employee, I should be able to see my ticket(s).
         Give: Employee is on Account page
         Then: Employee can see all reinbursement requests
 
