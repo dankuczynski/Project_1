@@ -1,5 +1,8 @@
+import logging
+
 from werkzeug.utils import redirect
 from custom_exceptions.bad_employee_info import BadEmployeeInfo
+from custom_exceptions.nothing_deleted import NothingDeleted
 from utils.manage_connection import OperationalError, connect
 import os
 
@@ -12,6 +15,10 @@ from custom_exceptions.bad_ticket_info import BadTicketInfo
 
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
+
+
+# logging.basicConfig(filename="records.log", level=logging.DEBUG, format=f"%(asctime)s %(levelname)s %(message)s")
+
 
 app: Flask = Flask(__name__)
 CORS(app) # use this to avoid cors errors
@@ -51,6 +58,12 @@ def making_tickets():
         }
         return jsonify(message), 400
 
+    except BadTicketInfo as e:
+        message = {
+        "message": str(e)
+    }
+        return jsonify(message), 400
+
 
 @app.get("/tickets/<employeeId>")
 def viewing_tickets(employeeId: str):
@@ -63,6 +76,11 @@ def viewing_tickets(employeeId: str):
             "message": str(e)
         }
         return jsonify(message), 400
+    except BadTicketInfo as e:
+        message = {
+            "message": str(e)
+        }
+        return jsonify(message), 404
     # service layer to handle conversion
     # service layer to turn into Ticket objects into dictionaries
     # list of dictionaries and jsonify them
@@ -82,6 +100,15 @@ def deleting_ticket(ticket_num: str):
             "message": str(e)
         }
         return jsonify(message), 400
+    except NothingDeleted as e:
+        message = {
+            "message": str(e)
+        }
+        return jsonify(message), 400
+
+
+
+# behave /folder_path/file.feature --outfile /path_to_log/name.log
 
 
 app.run()
