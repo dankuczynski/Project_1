@@ -39,6 +39,12 @@
 - Gitbash
 - Postman
 - Google Draw
+- Cucumber
+- Selenium
+- Chomerdriver
+- geckodriver
+- IEDriverServer
+- Behave
 
 
 ### Scope
@@ -53,7 +59,6 @@
 
     - Ticket(
         ticket_number serial primary key,
-        ticket_status varchar(10),
         employee_id int foreign key,        
         reimbursement_reason varchar(100),
         reimbursement_ticket_amount float
@@ -63,119 +68,66 @@
 - Testing plan
 
     - Data_Access_Layer
-        
-        - C:
-        - Positive 
-            - create_ticket_success()
-        - Negative
-            - create_ticket_invalid_datatype()
-            - create_ticket_empty_string()
-            - create_tickeet_invalid_employee_id()
-            - create_ticket_excess_amount()
-            - create_ticket_zero_and_less_than_zero()
-            - create_ticket_reason_length()
-            - create_ticket_reason_invalid_datatype()
-            - create_ticket_reason_invalid_empty_string()
+      - Employee_DAO
+        - create_ticket_success(1.1)
+            - create_ticket_reason_invalid_datatype(1.2)
+            - create_ticket_empty_string(1.3)
+            - create_ticket_excess_amount(1.4)
+            - create_ticket_zero_and_less_than_zero(1.5)
+
+        - get_all_ticket_by_employee_id_success(1.6)
+
+        - delete_ticket_success(1.7)
+            - delete_ticket_invalid_data_type(1.8)
+            - delete_ticket_invalid_ticket_number(1.9)
+
+        - get_username_success(2.1)
+            - get_employee_username_invalid_id(2.2)
+            - get_employee_password_by_id(2.3)
+            - get_read_employee_password_invalid_id(2.4)
 
 
-        - R:
-        - Positive
-            - get_ticket_status_sucess()
-            - get_all_ticket_by_employee_id_success()
-        - Negative
-            - get_ticket_status_invalid_ticket_number()
-            - get_ticket_status_invalid_data_type()
-            - get_all_tickets_invalid_employee_id()
-            - get_all_tickets_invalid_datatype()
-
-
-        - U:
-        - Positive
-            - update_ticket_success()
-        - Negative
-            - update_ticket_invalid_ticket_number()
-            - update_ticket_invalid_data_type()
-
-
-        - D:
-        - Postitive
-            - delete_ticket_success()
-        - Negative
-            - delete_ticket_invalid_ticket_number()
-            - delete_ticket_invalid_data_type()
-
+            - get_all_tickets_invalid_employee_id(?)
+            - get_all_tickets_invalid_datatype(?)
 
 
     - Service_Access_Layer
 
-        - Ticket Cancellation:
+        - Ticket SAL:
+            - check_non_int_employee_id(3.1)
+            - check_non_str_reimbursement_reason(3.2)
+            - check_non_float_ticekt_amount(3.3)
+            - check_reimbursement_reason_length(3.4)
+            - check_ticket_amount_over_limit(3.5)
+            - check_ticket_amount_under_limit(3.6) 
+            
+            - ticket_cancellation_success(3.7)
+                - ticket_cancellation_invalid_ticket_number(3.8)
+                - ticket_cancellation_invalid_ticket_number_data_type(3.9)
 
-        - Positive
-            - ticket_cancellation_success()
-
-        - Negative
-            - ticket_cancellation_invalid_ticket_numer()
-            - ticket_cancellation_invalid_data_type()
-
-        - User Login:
-
-        - Positive
-            - user_login_success()
-        - Negative
-            - invalid_user_name()
-            - invalid_password()
-            - invalid_password_length()
-            - invalid_username_length()
-
-
-        - User Logout:
-
-        - Positive
-            - user_logout_success()
+            - user_login_success(4.1)
+                - test_invalid_username(4.2)
+                - test_invalid_password(4.3)
+                - test_invalid_password_length(4.4)
+                - test_invalid_username_length(4.5)
 
 
 
         - API
-
-            - Successful connection to database:
-
-            - Positive
-                - successful_connection_to_database()
-            - Negative
+            - successful_connection_to_database(5.1)
                 - no_connection_to_database()
 
-            
-            - Create ticket in database:
-
-            - Positive
-                - create_ticket_database_success()
-            - Negative
+            - create_ticket_database_success(5.2)
                 - create_ticket_database_improper_values_for_schema()
                 - create_ticket_not_inserted_into_database()
                 - create_JSON_not_converting()
 
 
-            - Read ticket in database:
-
-            - Positive
-                - reading_ticket_database_success()
-            - Negative
+            - reading_ticket_database_success(5.3)
                 - reading_improper_output()
 
-            
-            - Update ticket in database:
 
-            - Positive
-                - update_ticket_database_success()
-            - Negative
-                - update_improper_values_for_schema()
-                - update_JSON_not_converting()
-
-            - Delete ticket in database:
-
-            - Postive
-                - delete_ticket_success()
-            - Negative
+            - delete_ticket_success(5.4)
                 - delete_improper_values_for_schema()
                 - delete_JSON_not_converting()
 

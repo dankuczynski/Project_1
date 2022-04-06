@@ -12,6 +12,3 @@ class EmployeeSALInterface(ABC):
     def user_account_access(self, username: str, password: str) -> Employee:
         pass
 
-    @abstractmethod
-    def username_password_data_type_check(self, username: str, password: str):
-        pass
