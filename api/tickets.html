@@ -16,7 +16,7 @@
         View your reimbursement tickets
     </button>
     <br>
-    <button id="logout" onclick="logout()">
+    <button id="log_out" onclick="logout()">
        Logout from your account
     </button>
     <br>
@@ -139,7 +139,7 @@
     }
 }
 
-    async function logout(){
+        function logout(){
         window.localStorage.removeItem("EmployeeId");
         window.localStorage.removeItem("singleTicket");
         window.location.href = "login.html";
