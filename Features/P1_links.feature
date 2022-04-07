@@ -8,8 +8,8 @@ Feature: I want to access ticket reimbursement webpage
    Then I will be on <titley> page
 
         Examples:
-          | username | password      | reimbursementReason | reimbursementAmount | ticketNumber | titley                  |
-          | WillTest | D03sThisW0rk? | I need money        | 500.00              | 238          | create_and_view_tickets |
+          | username | password     | reimbursementReason | reimbursementAmount | ticketNumber | titley                  |
+          | KefkaW0n | C1dh4sN0Sh1p | I need money        | 500.00              | 6            | create_and_view_tickets |
 
   Scenario Outline: I want to create reimbursement ticket
     Given I am in the ticket reimbursement home page
@@ -21,7 +21,7 @@ Feature: I want to access ticket reimbursement webpage
 
         Examples:
           | username | password      | reimbursementReason | reimbursementAmount | ticketNumber |
-          | WillTest | D03sThisW0rk? | I need money        | 500.00              | 225          |
+          | WillTest | D03sThisW0rk? | food                | 15.00               | 6            |
 
   Scenario: I want to view the reimbursement ticket
     Given I am in the ticket reimbursement home page
@@ -37,7 +37,7 @@ Feature: I want to access ticket reimbursement webpage
 
         Examples:
           | username | password      | reimbursementReason | reimbursementAmount | ticketNumber |
-          | WillTest | D03sThisW0rk? | I need money        | 500.00              | 247          |
+          | WillTest | D03sThisW0rk? | I need money        | 500.00              | 6            |
 
   Scenario: I want to logout from ticket reimbursement home page
     Given I am in the ticket reimbursement home page a
