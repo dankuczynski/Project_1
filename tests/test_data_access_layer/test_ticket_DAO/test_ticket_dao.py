@@ -54,8 +54,9 @@ def test_create_ticket_equal_less_than_zero_amount():
 
 
 def test_get_all_ticket_by_employee_id():
-    result = ticket_dao.get_all_ticket_by_employee_id(1)
+    result = ticket_dao.get_all_ticket_by_employee_id(2)
     assert len(result) >= 1
+
 
 def test_delete_ticket_success():
     result = ticket_dao.delete_ticket(0)
